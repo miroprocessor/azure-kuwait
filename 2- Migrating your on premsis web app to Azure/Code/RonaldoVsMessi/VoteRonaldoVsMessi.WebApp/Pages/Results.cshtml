@@ -1,0 +1,35 @@
+﻿@page
+@model VoteRonaldoVsMessi.WebApp.Pages.ResultsModel
+@{
+    ViewData["Title"] = "Results";
+}
+
+<div class="container text-center">
+    <h2>Results</h2>
+    <div class="h-100 row align-items-center">
+        <div class="col">
+            <canvas id="myChart" height="100"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript">
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Ronaldo", "Messi"],
+                datasets: [{
+                    backgroundColor: [
+                        "#28a745",
+                        "#dc3545"
+                    ],
+                    data: [@Model.VotingResults.Ronaldo.Count, @Model.VotingResults.Messi.Count]
+                }]
+            }
+        });
+    </script>
+}
+
