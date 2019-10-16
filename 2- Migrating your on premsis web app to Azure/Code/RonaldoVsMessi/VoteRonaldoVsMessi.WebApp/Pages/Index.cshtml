@@ -1,0 +1,64 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Vote For Your Favourite Player!</h1>
+</div>
+<form id="voting" asp-page="./Index" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="@(string.IsNullOrEmpty(Model.SelectedCandidate) ? "col-6" : "col-4")">
+                <div class="card bg-success text-center overlay-image" style="width: 18rem;">
+                    <img id="ronaldo" src="~/img/Ronaldo.jpg" class="card-img-top image" alt="Ronaldo.jpg">
+                    <div class="card-body middle">
+                        <button type="submit" class="btn btn-primary" value="Ronaldo">Vote for Ronaldo</button>
+                    </div>
+                </div>
+            </div>
+            @if (Model.SelectedCandidate == "Ronaldo")
+            {
+                <div class="col-4">
+                    <div class="card bg-success text-white text-center overlay-image" style="width: 18rem;">
+                        <img src="~/img/RonaldoSelected.gif" class="card-img-top" alt="RonaldoSelected.gif">
+                        <div class="card-body">
+                            <h5 class="card-title">You voted for Ronaldo!</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Model.SelectedCandidate == "Messi")
+            {
+                <div class="col-4">
+                    <div class="card bg-danger text-white text-center overlay-image" style="width: 18rem;">
+                        <img src="~/img/MessiSelected.gif" class="card-img-top" alt="RonaldoSelected.gif">
+                        <div class="card-body">
+                            <h5 class="card-title">You voted for Messi!</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="@(string.IsNullOrEmpty(Model.SelectedCandidate) ? "col-6" : "col-4")">
+                <div class="card bg-danger float-right text-center overlay-image" style="width: 18rem;">
+                    <img id="messi" src="~/img/Messi.jpg" class="card-img-top image" alt="Messi.jpg">
+                    <div class="card-body middle">
+                        <button type="submit" class="btn btn-primary" value="Messi">Vote for Messi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="SelectedCandidate" />
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('button[type="submit"]').click(function () {
+                $('#SelectedCandidate').val($(this).val());
+            });
+        });
+    </script>
+}
