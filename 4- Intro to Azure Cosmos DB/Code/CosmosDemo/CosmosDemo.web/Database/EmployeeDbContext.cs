@@ -18,7 +18,7 @@ namespace CosmosDemo.web.Database
 
             modelBuilder.Entity<Employee>()
                 .ToContainer("employees")
-                .HasNoDiscriminator();
+               .HasNoDiscriminator();
         }
     }
 }
